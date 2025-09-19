@@ -1,0 +1,15 @@
+# AWS Copilot Environment Configuration for Development
+# This file defines the development environment settings
+
+name: development
+type: Environment
+network:
+  vpc:
+    enable_logs: true
+count:
+  min: 1
+  max: 3
+http:
+  public:
+    certificates:
+      - "*.agentcore.dev"
