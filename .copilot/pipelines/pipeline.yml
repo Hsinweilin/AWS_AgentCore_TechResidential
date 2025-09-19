@@ -1,0 +1,24 @@
+# AWS Copilot Pipeline Configuration
+# This file defines the CI/CD pipeline for AWS AgentCore TechResidential
+
+name: aws-agentcore-pipeline
+
+source:
+  provider: GitHub
+  properties:
+    repository: https://github.com/Hsinweilin/AWS_AgentCore_TechResidential
+    branch: main
+
+build:
+  commands:
+    - echo "Installing dependencies..."
+    - npm install
+    - echo "Running tests..."
+    - npm test
+    - echo "Building application..."
+    - npm run build
+
+environments:
+  development:
+    name: development
+    region: us-east-1
