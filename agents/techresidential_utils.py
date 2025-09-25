@@ -152,7 +152,9 @@ def get_or_create_m2m_client(cognito, user_pool_id, CLIENT_NAME, RESOURCE_SERVER
 
 def get_token(user_pool_id: str, client_id: str, client_secret: str, scope_string: str, REGION: str) -> dict:
     try:
+        # Cognito’s hosted domain for OAuth endpoints uses the user pool ID without underscores in its subdomain.
         user_pool_id_without_underscore = user_pool_id.replace("_", "")
+        # OAuth2 token endpoint URL on cognito domain
         url = f"https://{user_pool_id_without_underscore}.auth.{REGION}.amazoncognito.com/oauth2/token"
         headers = {"Content-Type": "application/x-www-form-urlencoded"}
         data = {
@@ -162,7 +164,7 @@ def get_token(user_pool_id: str, client_id: str, client_secret: str, scope_strin
             "scope": scope_string,
 
         }
-        print(client_id)
+        # print(client_id)
         response = requests.post(url, headers=headers, data=data)
         response.raise_for_status()
         return response.json()
