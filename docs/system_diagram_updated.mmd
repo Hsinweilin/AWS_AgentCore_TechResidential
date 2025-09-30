@@ -1,0 +1,95 @@
+```mermaid
+flowchart TD
+    %% Users and Interfaces
+    User["User"]
+    WebApp["Web Application\n(ECS)"]
+    
+    %% Data Storage
+    S3Prompts["S3\nPrompt Files"]
+    S3Docs["S3\nDownloaded Documents"]
+    SecretsMgr["AWS Secrets Manager\nCredentials"]
+    RDS["Amazon RDS\nApplication Data"]
+    
+    %% Compute and Orchestration
+    Lambda["Lambda Function\nTask Handler"]
+    EventBridge["EventBridge Scheduler"]
+    
+    %% AWS Bedrock Components
+    BedrockLLM["AWS Bedrock\nFoundation Model"]
+    AgentRuntime["AgentCore Runtime"]
+    AgentGateway["AgentCore Gateway"]
+    AgentIdentity["AgentCore Identity"]
+    BrowserTool["AgentCore Browser Tool"]
+    Observability["AgentCore Observability"]
+    
+    %% Notification and External
+    SES["Amazon SES\nEmail Service"]
+    TargetWebsite["Target Website"]
+    CloudWatch["CloudWatch\nLogs & Metrics"]
+    
+    %% IAM Roles
+    IAMRoles["IAM Roles & Permissions"]
+    
+    %% WORKFLOW CONNECTIONS
+    
+    %% Step 1: User submits information through web app
+    User -->|"Submit web_url, credentials,\nprompt file, schedule"| WebApp
+    WebApp -->|"Store application data"| RDS
+    
+    %% Step 2: Web app calls Lambda to set up automation
+    WebApp -->|"Trigger setup"| Lambda
+    
+    %% Step 3: Lambda stores data and sets up schedule
+    Lambda -->|"Store credentials"| SecretsMgr
+    Lambda -->|"Store prompt file"| S3Prompts
+    Lambda -->|"Create schedule"| EventBridge
+    
+    %% Step 4: Schedule triggers Lambda
+    EventBridge -->|"Trigger at scheduled time"| Lambda
+    
+    %% Step 5: Lambda invokes Agent
+    Lambda -->|"Invoke agent with parameters"| AgentRuntime
+    
+    %% Step 6: Agent Runtime loads dependencies
+    AgentRuntime -->|"Access LLM"| BedrockLLM
+    AgentRuntime -->|"Use identity"| AgentIdentity
+    AgentRuntime -->|"Connect to tools"| AgentGateway
+    AgentRuntime -->|"Track metrics"| Observability
+    
+    %% Step 7: Agent accesses tools via Gateway
+    AgentGateway -->|"Get credentials"| SecretsMgr
+    AgentGateway -->|"Get prompts"| S3Prompts
+    AgentGateway -->|"Use browser tool"| BrowserTool
+    
+    %% Step 8: Browser tool interacts with website
+    BrowserTool -->|"Login and navigate"| TargetWebsite
+    BrowserTool -->|"Download document"| TargetWebsite
+    
+    %% Step 9: Agent stores document and notifies user
+    AgentGateway -->|"Store document"| S3Docs
+    AgentGateway -->|"Send notification"| SES
+    
+    %% Step 10: Email notification to user
+    SES -->|"Email with document link"| User
+    
+    %% Monitoring and permissions
+    Observability -->|"Log events"| CloudWatch
+    Lambda -->|"Log activities"| CloudWatch
+    IAMRoles -->|"Grant permissions"| Lambda
+    IAMRoles -->|"Grant permissions"| AgentRuntime
+    IAMRoles -->|"Grant permissions"| AgentGateway
+    IAMRoles -->|"Grant permissions"| WebApp
+    
+    %% Styling
+    classDef aws fill:#FF9900,stroke:#232F3E,stroke-width:2px,color:white;
+    classDef bedrock fill:#4B2E83,stroke:#232F3E,stroke-width:2px,color:white;
+    classDef user fill:#85B5CB,stroke:#232F3E,stroke-width:2px,color:white;
+    classDef external fill:#E6E6E6,stroke:#666666,stroke-width:1px,color:black;
+    classDef iam fill:#CC2F90,stroke:#232F3E,stroke-width:2px,color:white;
+    
+    class RDS,SecretsMgr,S3Prompts,S3Docs,EventBridge,Lambda,SES,CloudWatch aws;
+    class BedrockLLM,AgentRuntime,AgentGateway,AgentIdentity,BrowserTool,Observability bedrock;
+    class User,WebApp user;
+    class TargetWebsite external;
+    class IAMRoles iam;
+```

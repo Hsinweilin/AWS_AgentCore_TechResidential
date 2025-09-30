@@ -1,0 +1,60 @@
+# ---------------------------------------------------------------------------------------
+# Terraform-specific files to ignore
+# ---------------------------------------------------------------------------------------
+
+# Terraform stores its state locally in a file named terraform.tfstate. This file
+# contains sensitive data and the current state of your infrastructure. It should
+# never be committed to Git.
+#
+# Instead, you should use remote state management (e.g., S3, Terraform Cloud)
+# for collaboration and security.
+*.tfstate
+*.tfstate.*.backup
+*.tfstate.backup
+
+# Terraform also creates a file to track the version of providers it is using.
+# While you *can* commit this file (`.terraform.lock.hcl`), it's often better to
+# ignore it so that each developer's machine pulls the latest compatible provider
+# versions when they run `terraform init`. It prevents dependency conflicts.
+.terraform.lock.hcl
+
+# This is the directory where Terraform downloads providers and modules.
+# It's recreated automatically when you run `terraform init`.
+.terraform/
+
+# Crash logs from Terraform runs.
+crash.log
+crash.*.log
+
+# Terraform can create a file to store sensitive variables if you use the
+# `-var-file` flag with a file named `terraform.tfvars`. However, it's a
+# best practice to have a `terraform.tfvars` file that only contains non-sensitive
+# defaults and to use environment variables or a separate `-var-file` for secrets.
+#
+# If you are using a secrets management system (e.g., Vault, AWS Secrets Manager),
+# you can use `terraform.tfvars` for non-sensitive values, but it's still good
+# practice to not commit this file as it's environment-specific.
+#
+# It is generally recommended to **not** commit `terraform.tfvars` or any `.tfvars` file
+# that contains sensitive or environment-specific data.
+# However, if your `.tfvars` file only contains non-sensitive, shared values (e.g., resource tags),
+# you might choose to commit it. The lines below ignore them to be safe.
+*.tfvars
+*.tfvars.json
+
+# You might have a file that's used with `terraform apply -var-file=secret.tfvars`.
+# This is a common practice for storing sensitive data.
+secrets.tfvars
+
+# ---------------------------------------------------------------------------------------
+# General IDE and OS files
+# ---------------------------------------------------------------------------------------
+# Ignore common IDE files and operating system files that are not part of your codebase.
+.DS_Store
+.vscode/
+.idea/
+.env
+
+# Ignore any binary files or temporary files.
+*.log
+*.out
