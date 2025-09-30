@@ -1,0 +1,30 @@
+default_agent: strands_claude_getting_started
+agents:
+  strands_claude_getting_started:
+    name: strands_claude_getting_started
+    entrypoint: /Users/hsin-weilin/Desktop/projects/amazon-bedrock-agentcore-samples/01-tutorials/01-AgentCore-runtime/01-hosting-agent/01-strands-with-bedrock-model/strands_claude.py
+    platform: linux/arm64
+    container_runtime: docker
+    aws:
+      execution_role: arn:aws:iam::254599367545:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-8556fc4504
+      execution_role_auto_create: false
+      account: '254599367545'
+      region: us-east-1
+      ecr_repository: 254599367545.dkr.ecr.us-east-1.amazonaws.com/bedrock-agentcore-strands_claude_getting_started
+      ecr_auto_create: false
+      network_configuration:
+        network_mode: PUBLIC
+      protocol_configuration:
+        server_protocol: HTTP
+      observability:
+        enabled: true
+    bedrock_agentcore:
+      agent_id: strands_claude_getting_started-I4bXK0B5GU
+      agent_arn: arn:aws:bedrock-agentcore:us-east-1:254599367545:runtime/strands_claude_getting_started-I4bXK0B5GU
+      agent_session_id: b6b2210f-ddeb-4dab-8dcd-095d953d1c3e
+    codebuild:
+      project_name: bedrock-agentcore-strands_claude_getting_started-builder
+      execution_role: arn:aws:iam::254599367545:role/AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-8556fc4504
+      source_bucket: bedrock-agentcore-codebuild-sources-254599367545-us-east-1
+    authorizer_configuration: null
+    oauth_configuration: null

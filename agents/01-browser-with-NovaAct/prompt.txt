@@ -1,0 +1,6 @@
+Sign in to Microsoft OneDrive using the following credentials:
+
+Email: hsinwei@techresidential.com
+Password: David9709530
+
+After signing in, confirm that you have successfully accessed the OneDrive dashboard.
