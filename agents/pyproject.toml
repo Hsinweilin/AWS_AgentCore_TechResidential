@@ -1,0 +1,20 @@
+[project]
+name = "agents"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "bedrock-agentcore>=0.1.7",
+    "bedrock-agentcore-starter-toolkit>=0.1.19",
+    "boto3>=1.40.45",
+    "fastapi>=0.109.0",
+    "nova-act>=2.1.36.0",
+    "pip>=25.2",
+    "rich>=14.1.0",
+    "strands-agents>=1.10.0",
+    "strands-agents-tools>=0.2.9",
+    "utils>=1.0.2",
+    "uv>=0.8.22",
+    "uvicorn>=0.27.0",
+]
