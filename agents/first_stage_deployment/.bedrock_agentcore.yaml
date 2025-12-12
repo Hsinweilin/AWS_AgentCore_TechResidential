@@ -1,0 +1,31 @@
+default_agent: nabo_group_web_automation_agent
+agents:
+  nabo_group_web_automation_agent:
+    name: nabo_group_web_automation_agent
+    entrypoint: /Users/hsin-weilin/Desktop/projects/AWS_AgentCore_TechResidential/agents/first_stage_deployment/first_stage_agent.py
+    platform: linux/arm64
+    container_runtime: docker
+    aws:
+      execution_role: arn:aws:iam::254599367545:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-1891a66923
+      execution_role_auto_create: false
+      account: '254599367545'
+      region: us-east-1
+      ecr_repository: 254599367545.dkr.ecr.us-east-1.amazonaws.com/bedrock-agentcore-nabo_group_web_automation_agent
+      ecr_auto_create: false
+      network_configuration:
+        network_mode: PUBLIC
+      protocol_configuration:
+        server_protocol: HTTP
+      observability:
+        enabled: true
+    bedrock_agentcore:
+      agent_id: nabo_group_web_automation_agent-FQRoBmCqSM
+      agent_arn: arn:aws:bedrock-agentcore:us-east-1:254599367545:runtime/nabo_group_web_automation_agent-FQRoBmCqSM
+      agent_session_id: null
+    codebuild:
+      project_name: null
+      execution_role: null
+      source_bucket: null
+    authorizer_configuration: null
+    request_header_configuration: null
+    oauth_configuration: null
