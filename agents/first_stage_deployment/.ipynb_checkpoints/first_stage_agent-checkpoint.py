@@ -162,22 +162,39 @@ USER PROMPT:
                     )
                     console.print(f"✅ Uploaded to S3: {s3_file_key}")
                     return {
-                        "status": "success",
-                        "s3_key": s3_file_key,
-                        "s3_url": presigned_url,
-                        "file_name": os.path.basename(file_path),
-                        "file_size": file_size,
-                        "method": "filesystem_check" if download_triggered else "event"
+                        "output": {
+                            "status": "success",
+                            "s3_key": s3_file_key,
+                            "s3_url": presigned_url,
+                            "file_name": os.path.basename(file_path),
+                            "file_size": file_size,
+                            "method": "filesystem_check" if download_triggered else "event"
+                        }
                     }
                 except Exception as s3_error:
                     console.print(f"❌ Error uploading to S3: {repr(s3_error)}")
-                    return {"status": "s3_error", "reason": repr(s3_error)}
+                    return {
+                        "output": {
+                            "status": "s3_error",
+                            "reason": repr(s3_error)
+                        }
+                     }
             else:
-                return {"status": "error", "reason": "File not downloaded - all methods failed"}
+                return {
+                    "output": {
+                        "status": "error",
+                        "reason": "File not downloaded - all methods failed"
+                    }
+                }
                 
     except Exception as e:
         console.print(f"[red]❌ Error in nova_act_download: {repr(e)}[/red]")
-        return {"status": "error", "reason": f"NovaAct execution failed: {repr(e)}"}
+        return {
+            "output": {
+                "status": "error",
+                "reason": f"NovaAct execution failed: {repr(e)}"
+            }
+        }
 
 
 model_id = "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
