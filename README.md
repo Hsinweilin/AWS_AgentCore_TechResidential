@@ -19,6 +19,10 @@ The system uses a serverless architecture built on AWS services:
 - **AWS Systems Manager Parameter Store**: Stores configuration parameters and sensitive credentials
 - **AWS Secrets Manager**: Securely stores and rotates sensitive credentials
 
+## Project Samples
+
+Some AWS Agentcore Sample that I've personally experiment on, first stage agent development, and first stage agent deployment examples are in the [samples folder](/samples). Feel free to use the samples to complete your work.
+
 ## Getting Started
 
 ### 1. Prerequisites
