@@ -143,16 +143,15 @@ Cognito provides authentication and authorization for invoking your agent secure
 
 ### Get OAuth2 Access Token
 
-To invoke your agent, you'll use your Client ID, Client Secret, and Cognito Token URL to get an access token:
+To invoke your agent, you'll use your Client ID, Client Secret, and Cognito Token URL to get an access token in `invoke_agent.ipynb`:
 
 ```python
-import requests
-
 # Your Cognito credentials (from previous steps)
 COGNITO_TOKEN_URL = "https://<your-cognito-user-pool-id>.auth.us-east-1.amazoncognito.com/oauth2/token"
 CLIENT_ID = "your-app-client-id"  # Replace with your Client ID
 CLIENT_SECRET = "your-app-client-secret"  # Replace with your Client Secret
 SCOPE = "default-m2m-resource-server-dotx2k/read"
+```
 
 Use this `access_token` to invoke your agent in the `invoke_agent.ipynb` notebook.
 
