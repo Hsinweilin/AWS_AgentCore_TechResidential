@@ -1,6 +1,6 @@
 # AWS_AgentCore_TechResidential
 
-This repo is for the development of a web automation system using AWS Bedrock AgentCore with browser tools. Some of the source code is adapted from the open source official AWS Bedrock AgentCore repositories [Here](https://github.com/awslabs/amazon-bedrock-agentcore-samples)
+This repo is for the development of a web automation system using AWS Bedrock AgentCore with browser tools. Some of the source code is adapted from the open source official [AWS Bedrock AgentCore repositories](https://github.com/awslabs/amazon-bedrock-agentcore-samples)
 
 ## Overview
 
@@ -10,7 +10,7 @@ This project implements a cloud-based AI agent using AWS Bedrock AgentCore to au
 
 The system uses a serverless architecture built on AWS services:
 
-- **AWS Bedrock AgentCore**: Orchestrates the AI agent runtime/Identity and manages browser automation workflows
+- **AWS Bedrock AgentCore**: Orchestrates the AI agent runtime/Identity/Gateway and manages browser automation workflows
 - **Amazon Bedrock Models**: Provides Claude for AI reasoning and task planning
 - **AWS Cognito User Pool**: Manages authentication and authorization for agent invocations
 - **Amazon ECR**: Stores the containerized agent image for deployment
@@ -41,7 +41,7 @@ Before you begin, ensure you have the following:
     aws configure
     ```
     Then provide your AWS Access Key ID and Secret Access Key when prompted
-- **Python 3.8+** installed
+- **Python 3.10+** installed
 - **Jupyter Notebook** installed
   - Installation Guide: [Jupyter Installation](https://jupyter.org/install)
   - Quick setup:
@@ -68,3 +68,15 @@ uv init
 # Start Jupyter Lab with the active virtual environment
 uv run --active --with jupyter jupyter lab
 ```
+
+### Configure AWS Resources
+
+Follow the steps in [docs/configure_aws_resources.md](docs/configure_aws_resources.md) to set up necessary AWS resources like S3 bucket, Cognito, Parameter Store, Agentcore Execution Role, and ECR Repository.
+
+### Exectuting agent_deployment.ipynb
+
+Open and run the `agent_deployment.ipynb` notebook in Jupyter Lab to deploy your agent. This notebook will guide you through configuring and deploying your agent to AWS Bedrock AgentCore. Remember to update the notebook with your specific AWS resource names and configurations before running it, including test client data (your website, username, password, client name, and prompt file). Test the agent locally first to ensure it works as expected before deploying.
+
+### Invoke Agent with invoke_agent.ipynb
+
+Use the `invoke_agent.ipynb` notebook to test your deployed agent. Update the notebook with your Cognito details and Agent ARN before running it. This notebook will help you get an authentication token and send requests to your running agent, displaying the responses.
