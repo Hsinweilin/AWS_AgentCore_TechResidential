@@ -19,14 +19,9 @@ The system uses a serverless architecture built on AWS services:
 - **AWS Systems Manager Parameter Store**: Stores configuration parameters and sensitive credentials
 - **AWS Secrets Manager**: Securely stores and rotates sensitive credentials
 
-## Project Documentation
-
-- [SPECIFICATION.md](SPECIFICATION.md) - Detailed system requirements and specifications
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Project organization and implementation approach
-
 ## Getting Started
 
-### Prerequisites
+### 1. Prerequisites
 
 Before you begin, ensure you have the following:
 
@@ -57,7 +52,7 @@ Before you begin, ensure you have the following:
   - Installation Guide: [Docker Install](https://docs.docker.com/engine/install/#get-started)
   - Verify installation: `docker --version`
 
-### Start Jupyter Notebook
+### 2. Start Jupyter Notebook
 
 To start Jupyter Lab with the project environment, run the following commands:
 
@@ -69,14 +64,14 @@ uv init
 uv run --active --with jupyter jupyter lab
 ```
 
-### Configure AWS Resources
+### 3. Configure AWS Resources
 
 Follow the steps in [docs/configure_aws_resources.md](docs/configure_aws_resources.md) to set up necessary AWS resources like S3 bucket, Cognito, Parameter Store, Agentcore Execution Role, and ECR Repository.
 
-### Exectuting agent_deployment.ipynb
+### 4. Exectuting agent_deployment.ipynb
 
 Open and run the `agent_deployment.ipynb` notebook in Jupyter Lab to deploy your agent. This notebook will guide you through configuring and deploying your agent to AWS Bedrock AgentCore. Remember to update the notebook with your specific AWS resource names and configurations before running it, including test client data (your website, username, password, client name, and prompt file). Test the agent locally first to ensure it works as expected before deploying.
 
-### Invoke Agent with invoke_agent.ipynb
+### 5. Invoke Agent with invoke_agent.ipynb
 
 Use the `invoke_agent.ipynb` notebook to test your deployed agent. Update the notebook with your Cognito details and Agent ARN before running it. This notebook will help you get an authentication token and send requests to your running agent, displaying the responses.
