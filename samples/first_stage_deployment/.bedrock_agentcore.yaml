@@ -2,7 +2,7 @@ default_agent: nabo_group_web_automation_agent
 agents:
   nabo_group_web_automation_agent:
     name: nabo_group_web_automation_agent
-    entrypoint: /Users/hsin-weilin/Desktop/projects/AWS_AgentCore_TechResidential/agents/first_stage_deployment/first_stage_agent.py
+    entrypoint: /Users/hsin-weilin/Desktop/projects-dev/AWS_AgentCore_TechResidential/samples/first_stage_deployment/first_stage_agent.py
     platform: linux/arm64
     container_runtime: docker
     aws:

@@ -197,7 +197,7 @@ USER PROMPT:
         }
 
 
-model_id = "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+model_id = "us.anthropic.claude-sonnet-4-20250514-v1:0"
 model = BedrockModel(model_id=model_id)
 agent = Agent(
     model=model,
