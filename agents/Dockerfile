@@ -15,6 +15,8 @@ RUN uv pip install -r requirements.txt
 
 RUN uv pip install aws-opentelemetry-distro>=0.10.1
 
+# Install Playwright Chromium and its system dependencies (must run as root before switching user)
+RUN python -m playwright install --with-deps chromium
 
 # Set AWS region environment variable
 
@@ -24,6 +26,9 @@ ENV AWS_DEFAULT_REGION=us-east-1
 
 # Signal that this is running in Docker for host binding logic
 ENV DOCKER_CONTAINER=1
+
+# Skip Playwright install at runtime since browsers are pre-installed in the image
+ENV NOVA_ACT_SKIP_PLAYWRIGHT_INSTALL=1
 
 # Create non-root user
 RUN useradd -m -u 1000 bedrock_agentcore
