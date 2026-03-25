@@ -21,11 +21,17 @@ agents:
     bedrock_agentcore:
       agent_id: nabo_group_web_automation_agent_v2-AEmdkc4OF7
       agent_arn: arn:aws:bedrock-agentcore:us-east-1:254599367545:runtime/nabo_group_web_automation_agent_v2-AEmdkc4OF7
-      agent_session_id: f64ba76c-30d2-4f2c-8bd5-ae01f49299c0
+      agent_session_id: null
     codebuild:
-      project_name: bedrock-agentcore-nabo_group_web_automation_agent_v2-builder
-      execution_role: arn:aws:iam::254599367545:role/AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-d01e1119fe
-      source_bucket: bedrock-agentcore-codebuild-sources-254599367545-us-east-1
-    authorizer_configuration: null
+      project_name: null
+      execution_role: null
+      source_bucket: null
+    authorizer_configuration:
+      customJWTAuthorizer:
+        discoveryUrl: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_6JSmgTJRg/.well-known/openid-configuration
+        allowedClients:
+        - th1evqkupb3najhfg70cu3p27
+        allowedScopes:
+        - default-m2m-resource-server-dotx2k/read
     request_header_configuration: null
     oauth_configuration: null
